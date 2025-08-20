@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SIT Chaco - Contacto</title>
+        <link rel="icon" type="image/svg+xml" href="./public/img/logo_icono.png">
+        <meta content="Formulario para contactarte con el equipo de Sistema de Informacion Territorial" name="description">
+        <meta content="Formulario, Sistema de Informacion Territorial, consultas, acceso a datos, servicios" name="keywords">
+
+        <!-- Estilos -->
+        <link rel="stylesheet" href="./public/css/style.css">
+    </head>
+
+    <body>
+      {{ template "cabezera.html" }}
+
+
+    <!-- Formulario --> 
+    <div class="titulo_contac">
+        <h1>Contacto</h1>
+    </div>
+
+  <section id="form">
+    <div class="form-container">
+      <div class="form-content">
+        <!-- Mensajes de error y enviado -->
+        <div class="form__msj--error modal" style="display: none;">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            Por favor, complete todos los campos
+          </div>
+        </div>
+        <div class="form__msj--enviado modal" style="display: none;">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            Gracias! Nos contactaremos a la brevedad
+          </div>
+        </div>
+      <!-- Inputs -->
+      <form id="contactForm">
+        <div class="form__envio">
+            <div class="form__ingreso_izq">
+                <div class="form__ingreso">
+                    <p>Nombre y Apellido*</p>
+                    <input class="texto" id="name" type="text" placeholder="Ingresá tu nombre y apellido" required>
+                </div>
+                <div class="form__ingreso">
+                    <p>Email*</p>
+                    <input class="correo" id="email" type="email" placeholder="Ingresá tu email">
+                </div>
+                <div class="form__ingreso--com">
+                    <p>Comentario*</p>
+                    <textarea class="comentario" id="comentario" placeholder="Dejanos tu comentario" maxlength="500"></textarea>
+                    <p class="camposobl">(*) Campos obligatorios</p>
+                </div>
+            </div>
+            <div class="form__ingreso_der">
+                <div class="form__ingreso">
+                    <p>Teléfono*</p>
+                    <input class="telefono" id="tel" type="tel" placeholder="Ingresá tu teléfono">
+                </div>
+                <div class="form__ingreso">
+                    <p>Asunto*</p>
+                    <select class="perfil" id="perfil">
+                    <option value="" disabled selected>Seleccioná tu tipo de consulta</option>
+                    <option value="visualizador">Quiero contactarme con SIT</option>
+                    <option value="geoservicio">Necesito descargar un geoservicio</option>
+                    <option value="documentos">Quiero acceder a documentos que estan privados</option>
+                    <option value="usarSIT">Quiero visualizar mi información geográfica en SIT</option> 
+                    <option value="usarSIT">Otros</option>   
+                    </select>
+                </div>
+                <div class="contppal_img_cont">
+                    <img src="./public/img/contacto_form.png" alt="ContactoImg">
+                </div>
+            </div>   
+        </div> 
+        <div class="form_cta">
+            <button class="form__cta--enviar" type="submit">Enviar</button>
+        </div> 
+      </form>
+    </div>
+  </section>
+
+       {{ template "pie.html" }}
+    
+    <script src="./public/js/formcontacto.js"></script>
+    </body>       

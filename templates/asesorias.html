@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SIT Chaco - Sistema de Información Territorial</title>
+        <link rel="icon" type="image/svg+xml" href="./public/img/logo_icono.png">
+        <meta content="Sistema de información territorial de la provincia del Chaco, herramienta de visualización, consulta y descarga de datos georreferenciados" name="description">
+        <meta content="geoportal, datos, georreferencia, visualizador, Chaco, SIT, Sistemas de informacion territorial, gis, sig" name="keywords">
+
+        <!-- Estilos -->
+        <link rel="stylesheet" href="./public/css/style.css">
+    </head>
+
+<body>
+   {{ template "cabezera.html" }}
+
+    <div class="areas_contenedor">
+        <div class="areas_info">
+                <h1>Asesorías</h1>
+                <div class="areas_titulos">
+                    <div class="titulos_ind_1">
+                        <img src="./public/assets/iconos/RUBH_gris.png" alt="">
+                        <p>RUBH</p>
+                    </div>
+                    <div class="titulos_ind_2">
+                        <img src="./public/assets/iconos/RUBH_gris.png" alt="">
+                        <p>Gestión y Regularización de Tierras</p>
+                    </div>
+                    <div class="titulos_ind_3">
+                        <img src="./public/assets/iconos/RUBH_gris.png" alt="">
+                        <p>Planif. de Herramientas de Gestión</p>
+                    </div>
+                </div>
+        </div>
+
+        <div class="asesoriasgeneral">
+                <div class="asesoriasgeneral_lista">
+                    <ul class="asesorias_lista">
+                        <li class="asesoria_item">
+                            <span class="asesoria_nombre">Proyecto Nuevo Sur</span>
+                            <span class="asesoria_iconos">
+                            <img src="./public/assets/iconos/iconmas.png" alt="Ver Mapas" title="Ver Mapas">
+                            <img src="./public/assets/iconos/iconinfo.png" alt="Ver Informacion" title="Ver informacion">
+                            </span>
+                        </li>
+                        <li class="asesoria_item">
+                            <span class="asesoria_nombre">Plan Integral Barrio La Rubita</span>
+                            <span class="asesoria_iconos">
+                            <img src="./public/assets/iconos/iconmas.png" alt="Ver Mapas" title="Ver Mapas">
+                            <img src="./public/assets/iconos/iconinfo.png" alt="Ver Informacion" title="Ver informacion">
+                            </span>
+                        </li>
+                        <li class="asesoria_item">
+                            <span class="asesoria_nombre">Plan Integral Barrio La Rubita</span>
+                            <span class="asesoria_iconos">
+                            <img src="./public/assets/iconos/iconmas.png" alt="Ver Mapas" title="Ver Mapas">
+                            <img src="./public/assets/iconos/iconinfo.png" alt="Ver Informacion" title="Ver informacion">
+                            </span>
+                        </li>
+                        <li class="asesoria_item">
+                            <span class="asesoria_nombre">Proyecto Nuevo Sur</span>
+                            <span class="asesoria_iconos">
+                            <img src="./public/assets/iconos/iconmas.png" alt="Ver Mapas" title="Ver Mapas">
+                            <img src="./public/assets/iconos/iconinfo.png" alt="Ver Informacion" title="Ver informacion">
+                            </span>
+                        </li>
+                        <li class="asesoria_item">
+                            <span class="asesoria_nombre">Plan Integral Barrio La Rubita</span>
+                            <span class="asesoria_iconos">
+                            <img src="./public/assets/iconos/iconmas.png" alt="Ver Mapas" title="Ver Mapas">
+                            <img src="./public/assets/iconos/iconinfo.png" alt="Ver Informacion" title="Ver informacion">
+                            </span>
+                        </li>
+                        <li class="asesoria_item">
+                            <span class="asesoria_nombre">Plan Integral Barrio La Rubita</span>
+                            <span class="asesoria_iconos">
+                            <img src="./public/assets/iconos/iconmas.png" alt="Ver Mapas" title="Ver Mapas">
+                            <img src="./public/assets/iconos/iconinfo.png" alt="Ver Informacion" title="Ver informacion">
+                            </span>
+
+                    </ul>
+                </div>
+                <div class="asesoriasgeneral_prev">
+                    <div class="asesoriasgeneral_prev_botones">
+                        <a href="">DESCARGAR DATOS</a>
+                        <a href="">VER MAPA</a>
+                    </div>    
+                    <a href="https://chaco.gob.ar/" class="logoMPyDES"><img src="./public/img/mapprev.png" alt="MapaWeb"></a>
+                </div>
+        </div>
+    </div>
+
+
+    {{ template "pie.html" }}
+
+    <script>
+        const toggle = document.getElementById('menu-toggle');
+        const enlaces = document.getElementById('nav-enlaces');
+    
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            enlaces.classList.toggle('active');
+        });
+    
+        document.addEventListener('click', (e) => {
+            if (!enlaces.contains(e.target) && !toggle.contains(e.target)) {
+                enlaces.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>

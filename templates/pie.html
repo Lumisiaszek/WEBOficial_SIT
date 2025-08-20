@@ -1,0 +1,50 @@
+{{ define "pie.html" }}
+     <!-- Pie de pagina --> 
+      <footer>
+        <div class="piedepagina_pags">
+            <div class="piedepagina_info"> 
+                <div class="contenedor_logos">
+                    <a href="#"><img src="./public/assets/img/logomin_icono.png" alt="logo MPyDES"></a>
+                    <a href="#"><img src="./public/assets/img/logo_icono.png" alt="logo SIT"></a>
+                </div>
+                <div class="contenedor_redes">
+                    <a href="https://www.instagram.com/gobiernodelchaco" target="_blank" class="icon"><img class="redes__iconos-svg" src="./public/assets/iconos/instagram.svg" alt="instagram" title="instagram"/></a>
+                    <a href="https://www.facebook.com/GobiernodelChaco" target="_blank" class="icon"><img class="redes__iconos-svg" src="./public/assets/iconos/facebook.svg" alt="facebook" title="facebook"/></a>
+                    <a href="https://x.com/GobiernoChaco" class="icon" target="_blank"><img class="redes__iconos-svg" src="./public/assets/iconos/twitter-x.svg" alt="x-twitter" title="x-twitter"/></a>
+                    <a href="https://canalsomosuno.tv/" class="icon" target="_blank"><img class="redes__iconos-svg" src="./public/assets/iconos/radio.svg" alt="noticiasChaco" title="noticiasChaco"/></a>
+                </div>
+                <div class="contenedor_info">
+                    <div class="info_sit">
+                        <a href="mailto:sit.chaco@chaco.gob.ar"><img src="./public/assets/iconos/correo.png" alt="Correo SIT Chaco">sit.chaco@chaco.gob.ar</a>
+                        <a href="https://www.google.com/maps?q=Av.+Sarmiento+1768,+Resistencia,+Chaco" target="_blank"><img src="./public/assets/iconos/ubicacion.png" alt="Direccion SIT Chaco">Av. Sarmiento 1768 - Resistencia, Chaco</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_copys">
+                <div class="copy_sit">
+                    &copy; Copyright 2025 SIT Chaco - Todos los derechos reservados
+                </div>
+                <div class="copy_gis360">
+                    <p>Este tema fue desarrollado por:</p>
+                    <a href="mailto:gis360consultoria@gmail.com">360Concept.</a>
+                </div>
+            </div> 
+        </div>    
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('menu-toggle');
+        const enlaces = document.getElementById('nav-enlaces');
+    
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            enlaces.classList.toggle('active');
+        });
+    
+        document.addEventListener('click', (e) => {
+            if (!enlaces.contains(e.target) && !toggle.contains(e.target)) {
+                enlaces.classList.remove('active');
+            }
+        });
+    </script>
+{{ end }}

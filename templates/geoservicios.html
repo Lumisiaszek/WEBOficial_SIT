@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SIT Chaco - Geoservicios</title>
+        <link rel="icon" type="image/svg+xml" href="./public/img/logo_icono.png">
+        <meta content="Acceso a datos georreferenciados de la provincia del Chaco, WFS, WMS y Carpetas de descarga en diversos formatos" name="description">
+        <meta content="Datos, datos georreferenciados, servicios, WFS, WMS, documentos, archivos, formatos" name="keywords">
+
+        <!-- Estilos -->
+        <link rel="stylesheet" href="./public/css/style.css">
+    </head>
+
+
+    <body>
+
+     {{ template "cabezera.html" }}
+
+       <!-- Contenido --> 
+
+       <div class="caja_contenido">
+            <div class="conten_izq">
+                <div class="conten_izq--titulo">
+                    <img src="./public/assets/iconos/geoservicios.png" alt="">
+                    <h1>Geoservicios</h1>
+                </div>
+                <p>El Servicio de Mapas en Web (WMS) permite la visualización de información
+                   geográfica a partir de una representación de ésta, de una imagen del mundo
+                   real para un área solicitada por el usuario. Esta representación puede provenir
+                   de un archivo vectorial de un SIG, un mapa digital, una ortofoto, una imagen de
+                   satélite, entre múltiples posibilidades. Puede organizarse en una o más capas de
+                   datos que pueden visualizarse u ocultarse una a una. Se puede consultar cierta 
+                   información disponible y las características de la imagen del mapa.
+                </p>
+                <div class="conten_izq--img">
+                    <img src="./public/img/pccode.png" alt="">
+                </div>
+                
+            </div>
+            
+            <div class="conten_der">
+                <div class="conten_der--inst">
+                    <h3>¿Cómo visualizar y consultar los datos<br> geográficos con Qgis?</h3>
+                    <ol class="list_geoservicios">
+                        <li>Ejecutar el software de información geográfica Qgis.</li>
+                        <li>En la barra de navegación izquierda seleccionar <b>Añadir capa WMS o WFS.</b></li>
+                        <li>Seleccionar la opción <b>Nuevo.</b></li>
+                        <li>Completar los siguientes datos:</li>
+                        <h6>Nombre: SIT CHACO</h6><br>
+                        <h6>URL: https://sitchaco-ws.chaco.gov.ar/geoserver/sitchaco/wms</h6>
+                        <li>Seleccionar <b>Aceptar</b> y luego <b>Conectar.</b></li>
+                        <li>Se visualizarán las capas disponibles, marcar la o las deseadas y seleccionar <b>Añadir.</b></li>
+                    </ol>
+                </div>
+                <div class="conten_der--desc">
+                    <div class="conten_der--titulo">
+                        <h2>Formatos de descarga</h2>
+                        <img src="./public/assets/iconos/desc_blanco.png" alt="">
+                    </div>
+                
+                    <div class="conten_der--enlace">
+                        <p class="url-text">https://sitchaco-ws.chaco.gov.ar/geoserver/sitchaco/wms</p>
+                        <a href="#" class="copy-btn"><img src="./public/assets/iconos/ic_copiar.png" alt=""></a>
+                    </div>
+                    <hr>
+                    <div class="conten_der--enlace">
+                        <p class="url-text">https://sitchaco-ws.chaco.gov.ar/geoserver/sitchaco/wfs</p>
+                        <a href="#" class="copy-btn"><img src="./public/assets/iconos/ic_copiar.png" alt=""></a>
+                    </div>
+                    <hr>
+                    <div class="conten_der--enlace">
+                        <p class="url-text">https://sitchaco/recursos</p>
+                        <a href="#"><img src="./public/assets/iconos/files.png" alt="recursos SIT"></a>
+                    </div>
+                    <div class="conten_der--advert">
+                        <p>Para acceder a cada carpeta de Documentos y Archivos se deberá solicitar acceso al administrador</p>
+                        <img src="./public/assets/iconos/advert.png" alt="advertencia SIT">
+                    </div>
+                </div>
+            </div>
+       </div>
+        <div id="custom-alert" class="hidden">
+            <p id="custom-alert-message"></p>
+        </div>
+
+       {{ template "pie.html" }}
+    
+    <script src="./public/js/copPortapapeles.js"></script>
+    </body>       

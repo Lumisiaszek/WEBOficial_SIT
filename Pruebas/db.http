@@ -1,0 +1,2 @@
+### Get proyecto
+GET http://192.168.42.33:8000/get_proyecto/U/

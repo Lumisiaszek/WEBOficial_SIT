@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SIT Chaco - ¿Qué es SIT?</title>
+        <link rel="icon" type="image/svg+xml" href="./public/img/logo_icono.png">
+        <meta content="Conocé que es el Sistema de Información Territorial de la provincia del Chaco, nuestra misión, compromiso y objetivos para la consulta y visualización de informacion geográfica" name="description">
+        <meta content="SIT, Sistema de información territorial, objetivos SIT, Mision SIT, quienes somos, qué hacemos" name="keywords">
+
+        <!-- Estilos -->
+        <link rel="stylesheet" href="./public/css/style.css">
+    </head>
+
+    <body>
+       {{ template "cabezera.html" }}
+
+        <!-- Desplegables --> 
+        <div class="fondoSIT">
+            <div class="cont_desplegables">
+                <div class="tarjeta_desp" id="tarjeta1">
+                    <div class="tarjeta_desp--titulo" onclick="toggleContent('tarjeta1')">
+                        <img src="./public/img/logoSIT_Azul.png" alt="">
+                        <h1>¿Qué es SIT?</h1>
+                        <img src="./public/assets/iconos/flecha_abajo.png" alt="flechaAbajo" class="flecha">
+                    </div>
+                    <div class="tarjeta_desp--contenido">
+                        <p>El Sistema de Información Territorial (SIT) es una herramienta<br>
+                        esencial para la gestión y visualización de datos georreferenciados,<br>
+                        vinculados a los proyectos y obras que se desarrollan en la provincia<br>  
+                        del Chaco. Nuestro sistema permite almacenar, compartir y analizar<br> 
+                        datos de manera eficiente, contribuyendo a la toma de decisiones<br> 
+                        informadas y a la planificación estratégica en diversas áreas.</p>
+                        <iframe src="https://www.youtube.com/embed/lfXc4jBB3jQ" frameborder="0"></iframe>
+                    </div>
+                </div>
+
+                <div class="tarjeta_desp" id="tarjeta2">
+                    <div class="tarjeta_desp--titulo" onclick="toggleContent('tarjeta2')">
+                        <img src="./public/assets/iconos/icono_personas.png" alt="">
+                        <h1>Nuestra misión</h1>
+                        <img src="./public/assets/iconos/flecha_abajo.png" alt="flechaAbajo" class="flecha">                      
+                    </div>
+                    <div class="tarjeta_desp--contenido">
+                        <div>
+                            <ol class="numerada">
+                                <li>Eficiencia: Mejora la gestión y el seguimiento de proyectos mediante el acceso rápido a información precisa.</li>
+                                <li>Transparencia: Promueve la rendición de cuentas y la transparencia en la administración de recursos públicos.</li>
+                                <li>Planificación Estratégica: Apoya la planificación territorial a largo plazo con datos confiables y actualizados.</li>
+                                <li>Accesibilidad: Permite a diferentes actores acceder a información relevante, favoreciendo la colaboración interinstitucional.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tarjeta_desp" id="tarjeta3">
+                    <div class="tarjeta_desp--titulo" onclick="toggleContent('tarjeta3')">
+                        <img src="./public/assets/iconos/manitos.png" alt="">
+                        <h1>Nuestro compromiso</h1>
+                        <img src="./public/assets/iconos/flecha_abajo.png" alt="flechaAbajo" class="flecha">                       
+                    </div>
+                    <div class="tarjeta_desp--contenido">
+                        <p>En el Área de SIT, estamos comprometidos con el Desarrollo Sostenible y Equitativo. Trabajamos para ofrecer herramientas<br>
+                           tecnológicas avanzadas que faciliten la gestión eficiente de los recursos y promuevan el bienestar de nuestra comunidad.
+                        </p>  
+                    </div>
+                </div>
+
+
+                <div class="tarjeta_desp" id="tarjeta4">
+                    <div class="tarjeta_desp--titulo" onclick="toggleContent('tarjeta4')">
+                        <img src="./public/assets/iconos/objetivos.png" alt="">
+                        <h1>Objetivos</h1>
+                        <img src="./public/assets/iconos/flecha_abajo.png" alt="flechaAbajo" class="flecha">
+                    </div>
+                    <div class="tarjeta_desp--contenido">
+                        <div class="columna_tarjeta">
+                            <div class="columna_tarjeta--titulo">
+                                <img src="./public/assets/iconos/acceso_lock.png" alt="">
+                                <h2>Acceso confiable a la información</h2>
+                            </div>
+                            <ol class="numerada">
+                                <li>Proveer de información georreferenciada precisa<br> y actualizada.</li>
+                                <li>Asegurar la calidad de los datos para la toma de<br> decisiones efectivas.</li>
+                            </ol>
+                            <div class="columna_tarjeta--titulo">
+                                <img src="./public/assets/iconos/grua_gestion.png" alt="">
+                                <h2>Gestión de obras e infraestructura</h2>
+                            </div>
+                            <ol class="numerada">
+                                <li>Monitorear el estado de las obras.</li>
+                                <li>Facilitar el seguimiento y la supervisión de los<br> proyectos de ejecución.</li>
+                            </ol>
+                        </div>
+
+                        <div class="columna_tarjeta">
+                            <div class="columna_tarjeta--titulo">
+                                <img class="datospers" src="./public/assets/iconos/datospers.png" alt="">
+                                <h2>Datos de beneficiarios</h2>
+                            </div>
+                            <ol class="numerada">
+                                <li>Asegurar la transparencia y eficiencia en la<br> asignación de recursos.</li>
+                            </ol>
+                            <div class="columna_tarjeta--titulo">
+                                <img src="./public/assets/iconos/planifterr.png" alt="">
+                                <h2>Planificación territorial</h2>
+                            </div>
+                            <ol class="numerada">
+                                <li>Integrar datos de diversas fuentes para una<br> planificación territorial más efectiva.</li>
+                                <li>Proveer herramientas de análisis espacial para<br> el desarrollo urbano y rural.</li>
+                                <li>Facilitar estudios y evaluaciones precisas para<br> la toma de decisiones.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+        
+      {{ template "pie.html" }}
+        
+        <script src="./public/js/desplegable.js"></script>    
+    </body>
