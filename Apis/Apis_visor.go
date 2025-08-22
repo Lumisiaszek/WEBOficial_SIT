@@ -36,6 +36,12 @@ func Asesorias(c *gin.Context) {
 	})
 }
 
+func VisualizadorRubita(c *gin.Context) {
+	c.HTML(http.StatusOK, "visualizador_rubita.html", gin.H{
+		"title": "titulito",
+	})
+}
+
 func UnidadEjecutora(c *gin.Context) {
 	c.HTML(http.StatusOK, "unidad.html", gin.H{
 		"title": "VisorSGM",

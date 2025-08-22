@@ -45,6 +45,7 @@ func main() {
 	//Enrutadores de la aplicacion
 	r.GET("/", apis.Main)
 	r.GET("/asesorias", apis.Asesorias)
+	r.GET("/visualizador_rubita", apis.VisualizadorRubita)
 	r.GET("/geoservicios", apis.Geoservicios)
 	r.GET("/contacto", apis.Contacto)
 	r.GET("/unidad", apis.UnidadEjecutora)
