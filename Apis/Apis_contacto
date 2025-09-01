@@ -1,0 +1,53 @@
+package Apis
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+	"net/smtp"
+
+	"github.com/gin-gonic/gin"
+)
+
+// Estructura de los datos del formulario según tu HTML
+type ContactForm struct {
+	Name       string `json:"name"`
+	Email      string `json:"email"`
+	Tel        string `json:"tel"`
+	Perfil     string `json:"perfil"`
+	Comentario string `json:"comentario"`
+}
+
+// Función para registrar el endpoint de contacto
+func RegisterContactAPI(router *gin.Engine) {
+	router.POST("/enviar-correo", func(c *gin.Context) {
+		var form ContactForm
+		if err := c.BindJSON(&form); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": err.Error()})
+			return
+		}
+
+		// Configuración SMTP
+		from := "tucorreo@dominio.com" // tu correo
+		password := "tuPassword"       // tu password SMTP
+		to := "destino@dominio.com"    // correo destino
+		smtpHost := "smtp.dominio.com" // servidor SMTP
+		smtpPort := "587"              // puerto SMTP
+
+		// Cuerpo del correo
+		message := []byte(fmt.Sprintf(
+			"Subject: Nuevo mensaje desde formulario Home SIT\r\n\r\n"+
+				"Nombre: %s\r\nEmail: %s\r\nTel: %s\r\nAsunto: %s\r\nComentario: %s\r\n",
+			form.Name, form.Email, form.Tel, form.Perfil, form.Comentario,
+		))
+
+		auth := smtp.PlainAuth("", from, password, smtpHost)
+		if err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, []string{to}, message); err != nil {
+			log.Println("Error al enviar correo:", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true})
+	})
+}
