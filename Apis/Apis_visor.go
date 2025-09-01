@@ -2,10 +2,8 @@ package Apis
 
 import (
 	"net/http"
-	
-	
-	"github.com/gin-gonic/gin"
 
+	"github.com/gin-gonic/gin"
 )
 
 // Traer el template "main.html" y llenarlo con los datos enviados
@@ -68,8 +66,22 @@ func Atlas(c *gin.Context) {
 }
 
 func Visualizador_Rubita(c *gin.Context) {
-	c.HTML(http.StatusOK, "visualizador_rubita.html", gin.H{
-		"title": "VisorSGM",
+	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
+		"title":        "LA RUBITA - CH 284 | PROYECTO EJECUTIVO",
+		"lat_inicial":  "-27.49",
+		"long_inicial": "-58.97",
+		"zoom_inicial": "16",
+		"proyecto_bd":  "1",
+	})
+}
+
+func Visualizador_cdt(c *gin.Context) {
+	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
+		"title":        "PROYECTO NUEVO SUR",
+		"lat_inicial":  "-27.49",
+		"long_inicial": "-58.97",
+		"zoom_inicial": "10",
+		"proyecto_bd":  "2",
 	})
 }
 

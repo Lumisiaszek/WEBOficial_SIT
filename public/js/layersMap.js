@@ -18,7 +18,7 @@ function togglePanel() {
   const toggle = document.getElementById("togglePanel");
 
   panel.classList.toggle("oculto");
-  toggle.classList.toggle("oculto"); // ← esto es lo que te faltaba
+  toggle.classList.toggle("oculto"); 
 
   if (panel.classList.contains("oculto")) {
     toggle.innerHTML = "❯"; 
@@ -254,8 +254,11 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 // PANEL DE CAPAS - Registros BD 
 
+var proyecto_bd = document.querySelector(".proyecto_bd").innerHTML;
+
+
 function mostrarPanelCapas() {
-  fetch("https://sit.chaco.gob.ar/getcapas/P")
+  fetch("http://localhost/getcapas/P/"+proyecto_bd)
     .then(response => response.json())
     .then(registros => {
 

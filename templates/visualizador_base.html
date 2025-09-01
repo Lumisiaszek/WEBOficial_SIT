@@ -25,12 +25,18 @@
                     <a href="https://sit.chaco.gob.ar/"><img src="./public/assets/img/logo_icono.png" alt=""></a>
                 </div>
                 <div class="titulomapa">
-                    <h2>LA RUBITA - CH 284 | PROYECTO EJECUTIVO</h2> 
+                    <h2>{{.title}}</h2> 
                 </div> 
             </div>
         
 
         </div> 
+            <div style="position: absolute; opacity: 0%;">
+                <div class="lat_inicial">{{.lat_inicial}}</div>
+                <div class="long_inicial">{{.long_inicial}}</div>
+                <div class="zoom_inicial">{{.zoom_inicial}}</div>
+                <div class="proyecto_bd">{{.proyecto_bd}}</div>
+            </div>
 
         <div class="contenedorpanel" id="contenedorpanel">
             <div class="scroll-wrapper">
@@ -253,7 +259,9 @@
                         &copy; Copyright SIT 2025 - Todos los derechos reservados
                     </div>
                 </div> 
-            </div>    
+            </div> 
+            
+            
         </footer>
 
 
