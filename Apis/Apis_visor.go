@@ -84,6 +84,15 @@ func Visualizador_cdt(c *gin.Context) {
 		"proyecto_bd":  "2",
 	})
 }
+func Visualizador_rubh(c *gin.Context) {
+	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
+		"title":        "REGISTROS CH 220-156-157 - RUBH",
+		"lat_inicial":  "-27.50",
+		"long_inicial": "-59.03",
+		"zoom_inicial": "14",
+		"proyecto_bd":  "2",
+	})
+}
 
 func Ambiente(c *gin.Context) {
 	c.HTML(http.StatusOK, "ambiente.html", gin.H{
