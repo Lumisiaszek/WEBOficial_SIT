@@ -248,7 +248,7 @@ button::selection {
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
     padding: 1rem;
     width: 260px;
-    height: 260px;
+    min-height: 180px;
     margin: 0px 12px;
     box-sizing: border-box;
     border-radius: 1rem;
@@ -274,7 +274,7 @@ button::selection {
 
 .tarjeta_home p {
     bottom: 5px;
-    font-size: 1.15rem;
+    font-size: 0.9rem;
     color: var(--azul-laguna);
 }
 
@@ -314,13 +314,13 @@ button::selection {
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 100px;
-    left: 700px;
+    bottom: 150px;
+    left: 550px;
     z-index: 999;
 }
 
 .logosBanner img{
-    width: 200px;
+    width: 150px;
     height: auto;
 }
 

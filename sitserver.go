@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
-        "log"
-        "net/http/httputil"
-        "net/url"
+	"net/http/httputil"
+	"net/url"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
@@ -18,13 +19,11 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 
-
 	r.Use(cors.Default())
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"*"}
 	config.AllowMethods = []string{"GET", "POST", "DELETE"}
 	r.Use(cors.New(config))
-
 
 	r.LoadHTMLGlob("templates/*.html")
 	r.Static("/public", "./public")
@@ -43,24 +42,27 @@ func main() {
 
 	//Enrutadores de la aplicacion
 	r.GET("/", Apis.Main)
-	r.GET("/asesorias", Apis.Asesorias)
-    r.GET("/getcapas/:id_area", Apis.GetCapas)
+	r.GET("/urbana", Apis.Urbana)
+	r.GET("/getcapas/:id_area/:proyecto", Apis.GetCapas)
 	r.GET("/visualizador_rubita", Apis.Visualizador_Rubita)
+	r.GET("/visualizador_cdt", Apis.Visualizador_cdt)
+	r.GET("/visualizador_rubh", Apis.Visualizador_rubh)
 	r.GET("/geoservicios", Apis.Geoservicios)
 	r.GET("/contacto", Apis.Contacto)
-	r.GET("/unidad", Apis.UnidadEjecutora)
-	r.GET("/ambiente", Apis.Ambiente)
+	r.GET("/territorial", Apis.Territorial)
+	r.GET("/habitat", Apis.Habitat)
+	r.GET("/mapa_base", Apis.Mapa_base)
 	r.GET("/sit", Apis.QueEsSit)
 	r.GET("/get_proyecto/:sector/:area", Apis.GetProyectos)
 
-        // Proxy reverso para /geoserver/*
+	// Proxy reverso para /geoserver/*
 	r.Any("/geoserver/*proxyPath", ProxyReverso("localhost:8080"))
 
-  fmt.Println("Iniciando servidor en puerto", PORT_I)
-  err := r.Run(":" + PORT_I)
-  if err != nil {
-      log.Fatalf("Error al iniciar el servidor: %v", err)
-  }
+	fmt.Println("Iniciando servidor en puerto", PORT_I)
+	err := r.Run(":" + PORT_I)
+	if err != nil {
+		log.Fatalf("Error al iniciar el servidor: %v", err)
+	}
 }
 
 // ProxyReverso crea un handler que redirige las peticiones hacia targetURL

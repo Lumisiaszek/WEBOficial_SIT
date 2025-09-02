@@ -2,10 +2,8 @@ package Apis
 
 import (
 	"net/http"
-	
-	
-	"github.com/gin-gonic/gin"
 
+	"github.com/gin-gonic/gin"
 )
 
 // Traer el template "main.html" y llenarlo con los datos enviados
@@ -25,14 +23,14 @@ func Login(c *gin.Context) {
 	})
 }
 
-func Asesorias(c *gin.Context) {
-	c.HTML(http.StatusOK, "asesorias.html", gin.H{
+func Urbana(c *gin.Context) {
+	c.HTML(http.StatusOK, "urbana.html", gin.H{
 		"title": "VisorSGM",
 	})
 }
 
-func UnidadEjecutora(c *gin.Context) {
-	c.HTML(http.StatusOK, "unidad.html", gin.H{
+func Territorial(c *gin.Context) {
+	c.HTML(http.StatusOK, "territorial.html", gin.H{
 		"title": "VisorSGM",
 	})
 }
@@ -68,13 +66,42 @@ func Atlas(c *gin.Context) {
 }
 
 func Visualizador_Rubita(c *gin.Context) {
-	c.HTML(http.StatusOK, "visualizador_rubita.html", gin.H{
+	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
+		"title":        "LA RUBITA - CH 284 | PROYECTO EJECUTIVO",
+		"lat_inicial":  "-27.49",
+		"long_inicial": "-58.97",
+		"zoom_inicial": "16",
+		"proyecto_bd":  "1",
+	})
+}
+
+func Visualizador_cdt(c *gin.Context) {
+	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
+		"title":        "PROYECTO NUEVO SUR",
+		"lat_inicial":  "-27.48",
+		"long_inicial": "-59.00",
+		"zoom_inicial": "14",
+		"proyecto_bd":  "2",
+	})
+}
+func Visualizador_rubh(c *gin.Context) {
+	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
+		"title":        "REGISTROS CH 220-156-157 - RUBH",
+		"lat_inicial":  "-27.50",
+		"long_inicial": "-59.03",
+		"zoom_inicial": "14",
+		"proyecto_bd":  "2",
+	})
+}
+
+func Habitat(c *gin.Context) {
+	c.HTML(http.StatusOK, "habitat.html", gin.H{
 		"title": "VisorSGM",
 	})
 }
 
-func Ambiente(c *gin.Context) {
-	c.HTML(http.StatusOK, "ambiente.html", gin.H{
+func Mapa_base(c *gin.Context) {
+	c.HTML(http.StatusOK, "mapa_base.html", gin.H{
 		"title": "VisorSGM",
 	})
 }

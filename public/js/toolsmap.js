@@ -1,8 +1,14 @@
 // CARGANDO MAPA BASE CON COORDENADAS --------------------------------------------------------------------------------------------------------
+
+let positionlat = parseFloat (document.querySelector(".lat_inicial").innerHTML)
+let positionlong = parseFloat (document.querySelector(".long_inicial").innerHTML)
+let zoom = document.querySelector(".zoom_inicial").innerHTML
+
+
 var map = L.map('map', {
     zoomControl: false, 
-    preferCanvas: true
-    }).setView([-27.49, -58.97], 16);
+    preferCanvas: true,
+    }).setView([positionlat, positionlong], parseInt (zoom));
 
     // Mapa base de OpenStreetMap    
     var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
