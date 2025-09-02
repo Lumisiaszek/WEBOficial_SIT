@@ -78,9 +78,9 @@ func Visualizador_Rubita(c *gin.Context) {
 func Visualizador_cdt(c *gin.Context) {
 	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
 		"title":        "PROYECTO NUEVO SUR",
-		"lat_inicial":  "-27.49",
-		"long_inicial": "-58.97",
-		"zoom_inicial": "10",
+		"lat_inicial":  "-27.48",
+		"long_inicial": "-59.00",
+		"zoom_inicial": "14",
 		"proyecto_bd":  "2",
 	})
 }
