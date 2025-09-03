@@ -23,14 +23,14 @@ func Login(c *gin.Context) {
 	})
 }
 
-func Asesorias(c *gin.Context) {
-	c.HTML(http.StatusOK, "asesorias.html", gin.H{
+func Urbana(c *gin.Context) {
+	c.HTML(http.StatusOK, "urbana.html", gin.H{
 		"title": "VisorSGM",
 	})
 }
 
-func UnidadEjecutora(c *gin.Context) {
-	c.HTML(http.StatusOK, "unidad.html", gin.H{
+func Territorial(c *gin.Context) {
+	c.HTML(http.StatusOK, "territorial.html", gin.H{
 		"title": "VisorSGM",
 	})
 }
@@ -94,8 +94,14 @@ func Visualizador_rubh(c *gin.Context) {
 	})
 }
 
-func Ambiente(c *gin.Context) {
-	c.HTML(http.StatusOK, "ambiente.html", gin.H{
+func Habitat(c *gin.Context) {
+	c.HTML(http.StatusOK, "habitat.html", gin.H{
+		"title": "VisorSGM",
+	})
+}
+
+func Mapa_base(c *gin.Context) {
+	c.HTML(http.StatusOK, "mapa_base.html", gin.H{
 		"title": "VisorSGM",
 	})
 }
