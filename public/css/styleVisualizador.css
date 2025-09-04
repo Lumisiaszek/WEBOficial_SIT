@@ -933,6 +933,14 @@ footer {
   margin-top: 3px;
 }
 
+.etiquetachacracdt { 
+  background-color: transparent; 
+  box-shadow: none ;
+  color: rgb(158, 22, 22); 
+  border: none;
+  font-weight: bold; 
+  font-size: 10px;
+}
 
 
 /* RESPONSIVE */

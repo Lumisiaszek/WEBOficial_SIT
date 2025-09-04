@@ -1,4 +1,3 @@
-(() => {
 
 const UrlGeoserver = "https://sit.chaco.gob.ar/geoserver/";
 
@@ -30,6 +29,8 @@ function togglePanel() {
 }
 
 const capasGeoJSON = {};
+
+// RUBITA - CAPAS ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // SECTORES - RUBITA
 function cargarCapasSectores() {
@@ -232,6 +233,268 @@ function cargarCapaEquipam() {
 }
 
 
+// CAMPO DE TIRO - CAPAS ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Espacios Verdes 
+function cargarCapaEspVerdes() {
+    const url = ObtenerLinkJsonGeoserver("AMGR", "espVerdes_cdt");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            capasGeoJSON["espVerdes_cdt"] = L.geoJson(data, {
+                style: {
+                    color: '#a3be64ff',
+                    weight: 0.5,
+                    fillOpacity: document.querySelector(".valueespVerdes_cdt").value
+                }
+            }).addTo(map);
+        })
+        .catch(error => {
+            console.error("Error al cargar capa completa:", error);
+        });
+}
+
+
+// Manzanas
+function cargarCapaManzanas() {
+    const url = ObtenerLinkJsonGeoserver("AMGR", "manzanas_cdt");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            capasGeoJSON["manzanas_cdt"] = L.geoJson(data, {
+                style: {
+                    color: '#e6e6e6',
+                    fill: false,
+                    weight: 0.6,
+                    fillOpacity: document.querySelector(".valuemanzanas_cdt").value
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        const contenidoPopup = Object.entries(feature.properties)
+                            .map(([k, v]) => `<b>${k}:</b> ${v}`).join("<br>");
+                        layer.bindPopup(contenidoPopup);
+                    }
+                }
+            }).addTo(map);
+        })
+        .catch(error => {
+            console.error("Error al cargar capa completa:", error);
+        });
+}
+
+// Chacras
+function cargarCapaChacras() {
+    const url = ObtenerLinkJsonGeoserver("AMGR", "chacras_cdt");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            capasGeoJSON["chacras_cdt"] = L.geoJson(data, {
+                style: {
+                    color: '#c01313',
+                    fill: false,
+                    weight: 1.5,
+                    dashArray: '5, 5',
+                    fillOpacity: document.querySelector(".valuechacras_cdt").value
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties && feature.properties.nombre) {
+                        layer.bindTooltip(feature.properties.nombre.toString(), {
+                            permanent: true,
+                            direction: 'center',
+                            className: 'etiquetachacracdt'
+                    });
+                }
+            }
+            }).addTo(map);
+        })
+        .catch(error => {
+            console.error("Error al cargar capa completa:", error);
+        });
+}
+
+// Calles
+function cargarCapaCalles() {
+    const url = ObtenerLinkJsonGeoserver("AMGR", "calles_cdt");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            capasGeoJSON["calles_cdt"] = L.geoJson(data, {
+                style: {
+                    color: '#f87801ff',
+                    fill: false,
+                    weight: 1,
+                    fillOpacity: document.querySelector(".valuecalles_cdt").value
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        const contenidoPopup = Object.entries(feature.properties)
+                            .map(([k, v]) => `<b>${k}:</b> ${v}`).join("<br>");
+                        layer.bindPopup(contenidoPopup);
+                    }
+                }
+            }).addTo(map);
+        })
+        .catch(error => {
+            console.error("Error al cargar capa completa:", error);
+        });
+}
+
+// Viviendas
+function cargarCapaViviendas() {
+    const url = ObtenerLinkJsonGeoserver("AMGR", "viviendas_cdt");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            capasGeoJSON["viviendas_cdt"] = L.geoJson(data, {
+                style: {
+                    color: '#e2e2e2',
+                    fillColor: '#696969ff',
+                    weight: 0.2,
+                    fillOpacity: document.querySelector(".valueviviendas_cdt").value
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        const contenidoPopup = Object.entries(feature.properties)
+                            .map(([k, v]) => `<b>${k}:</b> ${v}`).join("<br>");
+                        layer.bindPopup(contenidoPopup);
+                    }
+                }
+            }).addTo(map);
+        })
+        .catch(error => {
+            console.error("Error al cargar capa completa:", error);
+        });
+}
+
+// Parcelario CDT
+function cargarCapaParcelarioCDT() {
+    const url = ObtenerLinkJsonGeoserver("AMGR", "parcelas_cdt");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            capasGeoJSON["parcelas_cdt"] = L.geoJson(data, {
+                style: {
+                    fill: false,
+                    color: '#e2e2e2',
+                    weight: 0.2,
+                    fillOpacity: document.querySelector(".valueparcelas_cdt").value
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        const contenidoPopup = Object.entries(feature.properties)
+                            .map(([k, v]) => `<b>${k}:</b> ${v}`).join("<br>");
+                        layer.bindPopup(contenidoPopup);
+                    }
+                }
+            }).addTo(map);
+        })
+        .catch(error => {
+            console.error("Error al cargar capa completa:", error);
+        });
+}
+
+
+
+
+
+
+// RUBH - CAPAS ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// EstacionTranfs
+function cargarCapaEstTransf_RUBH() {
+    const url = ObtenerLinkJsonGeoserver("AMGR", "et_rsu_ch156_157_cdt");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            capasGeoJSON["et_rsu_ch156_157_cdt"] = L.geoJson(data, {
+                style: {
+                    color: '#cccf11ff',
+                    weight: 1,
+                    fillOpacity: document.querySelector(".valueet_rsu_ch156_157_cdt").value
+                },
+            }).addTo(map);
+        })
+        .catch(error => {
+            console.error("Error al cargar capa completa:", error);
+        });
+}
+
+// Parcela 6
+function cargarCapaParc6_RUBH() {
+    const url = ObtenerLinkJsonGeoserver("AMGR", "parc 6 - ch 220_cdt");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            capasGeoJSON["parc 6 - ch 220_cdt"] = L.geoJson(data, {
+                style: {
+                    color: '#6e1100ff',
+                    weight: 2,
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        const contenidoPopup = Object.entries(feature.properties)
+                            .map(([k, v]) => `<b>${k}:</b> ${v}`).join("<br>");
+                        layer.bindPopup(contenidoPopup);
+                    }
+                }
+            }).addTo(map);
+        })
+        .catch(error => {
+            console.error("Error al cargar capa completa:", error);
+        });
+}
+
+// CAPA WMS CON ESTILO + GEOJSON CON DATOS SOY UNA GENIA 
+function cargarCapaReg220_Completa() {
+    // Código de la capa WMS (para visualización con estilo)
+    const wmsUrl = "http://10.5.6.162:8080/geoserver/AMGR/wms"; 
+    const layerName = "AMGR:registros_ch220_cdt"; 
+    const sldName = "Registros_CH220_CDT"; 
+
+    const wmsLayer = L.tileLayer.wms(wmsUrl, {
+        layers: layerName,
+        format: 'image/png',
+        transparent: true,
+        version: '1.1.0',
+        styles: sldName, 
+    }).addTo(map);
+
+    // Código de la capa GeoJSON (para pop-ups)
+    const url = ObtenerLinkJsonGeoserver("AMGR", "registros_ch220_cdt");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const geoJsonLayer = L.geoJson(data, {
+                pointToLayer: function (feature, latlng) {
+                    // Hacemos los puntos transparentes
+                    return L.circleMarker(latlng, {
+                        radius: 4,
+                        color: 'transparent',
+                        fillColor: 'transparent',
+                        weight: 0,
+                        fillOpacity: 0
+                    });
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        const contenidoPopup = Object.entries(feature.properties)
+                            .map(([k, v]) => `<b>${k}:</b> ${v}`).join("<br>");
+                        layer.bindPopup(contenidoPopup);
+                    }
+                }
+            }).addTo(map);
+
+            capasGeoJSON["registros_ch220_cdt"] = {
+                wms: wmsLayer,
+                geojson: geoJsonLayer
+            };
+        })
+        .catch(error => {
+            console.error("Error al cargar la capa completa:", error);
+        });
+}
+
+
 
 //TABS DEL PANEL IZQUIERDA (CAPAS Y REFERENCIAS)
 document.querySelectorAll('.tab').forEach(tab => {
@@ -251,7 +514,6 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 
 });
-
 
 
 // PANEL DE CAPAS - Registros BD 
@@ -300,11 +562,33 @@ function mostrarPanelCapas() {
 
       // Panel de escritorio
       const contenedorEscritorio = document.querySelector("#capasCheckboxContainer");
-      if (contenedorEscritorio) contenedorEscritorio.innerHTML = cadenaEscritorio;
+        if (contenedorEscritorio) {
+            contenedorEscritorio.innerHTML = cadenaEscritorio;
+            contenedorEscritorio.addEventListener('change', (e) => {
+            if (e.target.type === 'checkbox') {
+                activarCapa(e.target.id);
+            } else if (e.target.type === 'range') {
+            cambiarOpacidad(e.target.dataset.capa, e.target.value);
+            }
+         });
+        }
+
       // Panel movil
-      const contenedorMobile = document.querySelector("#capasCheckboxContainerMobile");
-      if (contenedorMobile) contenedorMobile.innerHTML = cadenaMobile;
-      })
+        const contenedorMobile = document.querySelector("#capasCheckboxContainerMobile");
+            if (contenedorMobile) {
+                contenedorMobile.innerHTML = cadenaMobile;
+                contenedorMobile.addEventListener('change', (e) => {
+                    if (e.target.type === 'checkbox') {
+                        const nombreCapa = e.target.id.replace('_m', '');
+                        const checkboxEscritorio = document.getElementById(nombreCapa);
+                        if (checkboxEscritorio) {
+                            checkboxEscritorio.checked = e.target.checked;
+                        }
+                        activarCapa(nombreCapa);
+                    }
+                });
+            }
+        })
       
     .catch(error => console.error("Error al cargar panel de capas:", error));
 }
@@ -314,13 +598,7 @@ mostrarPanelCapas();
 
 function activarCapa(nombreCapa) {
   const checkboxDesktop = document.getElementById(nombreCapa);
-
-  // Evaluamos si alguno está activado
-  const isChecked = (
-    (checkboxDesktop && checkboxDesktop.checked)
-  );
-
-  // Si no existe aún la capa, cargarla
+  const isChecked = checkboxDesktop && checkboxDesktop.checked;
 
   if (!capasGeoJSON[nombreCapa]) {
     switch (nombreCapa) {
@@ -331,12 +609,26 @@ function activarCapa(nombreCapa) {
       case "equipam_rub": cargarCapaEquipam(); break;
       case "cavas_rub": cargarCapaCavas(); break;
       case "ejeCalles_rub": cargarCapaEjesCalle(); break;
+      case "espVerdes_cdt": cargarCapaEspVerdes(); break;
+      case "manzanas_cdt": cargarCapaManzanas(); break;
+      case "calles_cdt": cargarCapaCalles(); break;
+      case "viviendas_cdt": cargarCapaViviendas(); break;
+      case "chacras_cdt": cargarCapaChacras(); break;
+      case "et_rsu_ch156_157_cdt": cargarCapaEstTransf_RUBH(); break;
+      case "parc 6 - ch 220_cdt": cargarCapaParc6_RUBH(); break;
+      case "parcelas_cdt": cargarCapaParcelarioCDT(); break;
+      case "registros_ch220_cdt": cargarCapaReg220_Completa(); break;
     }
 
     setTimeout(() => {
       if (capasGeoJSON[nombreCapa]) {
         if (isChecked) {
-          capasGeoJSON[nombreCapa].addTo(map);
+          if (capasGeoJSON[nombreCapa].wms && capasGeoJSON[nombreCapa].geojson) {
+            capasGeoJSON[nombreCapa].wms.addTo(map);
+            capasGeoJSON[nombreCapa].geojson.addTo(map);
+          } else {
+            capasGeoJSON[nombreCapa].addTo(map);
+          }
         }
         mostrarReferencias();
       }
@@ -345,9 +637,19 @@ function activarCapa(nombreCapa) {
   }
 
   if (isChecked) {
-    capasGeoJSON[nombreCapa].addTo(map);
+    if (capasGeoJSON[nombreCapa].wms && capasGeoJSON[nombreCapa].geojson) {
+      capasGeoJSON[nombreCapa].wms.addTo(map);
+      capasGeoJSON[nombreCapa].geojson.addTo(map);
+    } else {
+      capasGeoJSON[nombreCapa].addTo(map);
+    }
   } else {
-    map.removeLayer(capasGeoJSON[nombreCapa]);
+    if (capasGeoJSON[nombreCapa].wms && capasGeoJSON[nombreCapa].geojson) {
+      map.removeLayer(capasGeoJSON[nombreCapa].wms);
+      map.removeLayer(capasGeoJSON[nombreCapa].geojson);
+    } else {
+      map.removeLayer(capasGeoJSON[nombreCapa]);
+    }
   }
 
   mostrarReferencias();
@@ -374,7 +676,17 @@ function activarCapaMobile(nombreCapa) {
       case "equipam_rub": cargarCapaEquipam(); break;
       case "cavas_rub": cargarCapaCavas(); break;
       case "ejeCalles_rub": cargarCapaEjesCalle(); break;
+      case "espVerdes_cdt": cargarCapaEspVerdes(); break;
+      case "manzanas_cdt": cargarCapaManzanas(); break;
+      case "calles_cdt": cargarCapaCalles(); break;
+      case "viviendas_cdt": cargarCapaViviendas(); break;   
+      case "chacras_cdt": cargarCapaChacras(); break;
+      case "et_rsu_ch156_157_cdt": cargarCapaEstTransf_RUBH(); break; 
+      case "parc 6 - ch 220_cdt": cargarCapaParc6_RUBH(); break;  
+      case "registros_ch220_cdt": cargarCapaReg220_RUBH(); break; 
+      case "parcelas_cdt": cargarCapaParcelarioCDT(); break;
     }
+
 
     setTimeout(() => {
       if (capasGeoJSON[nombreCapa]) {
@@ -437,26 +749,31 @@ function obtenerColorCapa(nombre) {
     "mz_rub": "#2a2a2a",
     "equipam_rub": "blue",
     "cavas_rub": "#ACC4DB",
-    "ejeCalles_rub": "#c76c25"
+    "ejeCalles_rub": "#c76c25",
+    "espVerdes_cdt": "#a8cf8bff",
+    "manzanas_cdt": "#d4d4d4",
+    "calles_cdt": "#c76c25",
+    "viviendas_cdt": "#777777ff",
+    "chacras_cdt": '#af0808',
+    "parc 6 - ch 220_cdt": '#d4d4d4',
+    "registros_ch220_cdt": '#d4d4d4',
+    "parcelas_cdt": "#e7e5e5ff",
   };
   return colores[nombre] || "gray";
 }
 
 function obtenerTipoForzado(nombreCapa) {
   const tipos = {
-    "espVer_rub": "poligono",
-    "parcelario_rub": "poligono",
-    "sector_rub": "poligono",
-    "mz_rub": "poligono",
-    "equipam_rub": "poligono",
-    "cavas_rub": "poligono",
-    "ejeCalles_rub": "linea"
+    "ejeCalles_rub": "linea",
+    "calles_cdt": "linea",
+
+
   };
   return tipos[nombreCapa] || "poligono";
 }
 
 function formatearNombreCapa(nombre) {
-  return nombre.replace("_rub", "").replace(/_/g, " ");
+  return nombre.replace("_rub", "").replace("_cdt", "").replace(/_/g, " ");
 }
 
 // CONTROL DE OPACIDAD CAPA EN PANEL DE CAPAS
@@ -640,10 +957,3 @@ document.addEventListener("click", function (e) {
     panel.style.display = "none";
   }
 });
-
-  window.activarCapa = activarCapa;
-  window.activarCapaMobile = activarCapaMobile;
-  window.cambiarOpacidad = cambiarOpacidad;
-  window.togglePanel = togglePanel;
-
-})();

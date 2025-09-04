@@ -16,6 +16,14 @@ var map = L.map('map', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
+
+    // Mapa base de ArgenMap
+    var argenMap = L.tileLayer('https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png', {
+        maxZoom: 22,
+        attribution: '&copy; <a href="https://www.ign.gob.ar/">Instituto Geográfico Nacional</a>'
+    });
+
+
     // Mapa base CartoDB Gris
     var cartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap &copy; CARTO',
@@ -63,6 +71,7 @@ var map = L.map('map', {
 
     var baseMaps = {
         "OpenStreetMap": osm,
+        "IGN ArgenMap": argenMap,
         "Satelital": esriSatellite,
         "CartoDB Gris": cartoDB_Positron,
         "ESRI Dark": ArcGis_Dark,
