@@ -46,6 +46,7 @@ func main() {
 	r.GET("/getcapas/:id_area/:proyecto", Apis.GetCapas)
 	r.GET("/visualizador_rubita", Apis.Visualizador_Rubita)
 	r.GET("/visualizador_cdt", Apis.Visualizador_cdt)
+	r.GET("/visualizador_rubh", Apis.Visualizador_rubh)
 	r.GET("/geoservicios", Apis.Geoservicios)
 	r.GET("/contacto", Apis.Contacto)
 	r.GET("/unidad", Apis.UnidadEjecutora)
