@@ -90,7 +90,7 @@ func Visualizador_rubh(c *gin.Context) {
 		"lat_inicial":  "-27.50",
 		"long_inicial": "-59.03",
 		"zoom_inicial": "14",
-		"proyecto_bd":  "2",
+		"proyecto_bd":  "3",
 	})
 }
 
