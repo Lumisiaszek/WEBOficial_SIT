@@ -161,7 +161,7 @@ button::selection {
     color: var(--fucsia-lapacho);
 }
 
-.nav_logomin img {
+.nav_logomin img {   
     cursor: default;
     width: 15rem;
     height: auto;
@@ -186,12 +186,14 @@ button::selection {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0rem 0rem 0rem 0rem;
 }
 
 .cont_izq img {
     width: 80%;
     height: auto;
     margin-bottom: 1rem;
+    
 }
 
 .cont_izq h2 {
@@ -212,9 +214,9 @@ button::selection {
     background-color: var(--fucsia-lapacho);
     text-align: center;
     color: white;
-    padding: 0.3rem 0.9rem;
-    border-radius: 1rem;
-    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
@@ -223,15 +225,15 @@ button::selection {
 }
 
 .cont_der {
-    margin: 0 0 0 12rem;
+    margin: 0 0 0 0rem;
 }
 
 .cont_der h1 {
     font-family: 'gothambold';
     font-size: 1.8rem;
     text-align: center;
-    margin-bottom: 2rem;
-    margin-top: 4rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .cont_tarjetas {
@@ -239,21 +241,22 @@ button::selection {
     flex-direction: row;
     text-align: center;
     max-width: 100%;
+    padding: 10px;
 }
 
 .tarjeta_home {
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
     padding: 1rem;
-    width: 15rem;
-    height: 15rem;
-    margin: 0.1rem 1.2rem;
+    width: 260px;
+    min-height: 180px;
+    margin: 0px 12px;
     box-sizing: border-box;
     border-radius: 1rem;
     border: 2px solid var(--azul-laguna);
 }
 
 .tarjeta_home img {
-    width: 4rem;
+    width: 4.5rem;
     height: auto;
     max-width: 100%;
     padding: 1rem;
@@ -270,6 +273,7 @@ button::selection {
 }
 
 .tarjeta_home p {
+    bottom: 5px;
     font-size: 0.9rem;
     color: var(--azul-laguna);
 }
@@ -281,8 +285,8 @@ button::selection {
     align-items: center;
     background: url("../assets/img/banner_PUI.svg") no-repeat center center;
     background-size: contain;
-    height: 400px; 
-    flex-shrink: 0;  
+    height: 400px;    
+    flex-shrink: 0; 
     margin-bottom: 2.5rem;   
 }
 
@@ -310,13 +314,13 @@ button::selection {
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 100px;
-    left: 700px;
+    bottom: 150px;
+    left: 550px;
     z-index: 999;
 }
 
 .logosBanner img{
-    width: 200px;
+    width: 150px;
     height: auto;
 }
 
@@ -1198,7 +1202,7 @@ select.perfil {
     }
 
     .nav_logoSIT img,
-    .nav_logomin img{
+    .nav_logomin img{        
         width: 150px;
         height: auto;
     }
@@ -1491,6 +1495,7 @@ select.perfil {
     }
 
     .cont_tarjetas {
+        
         flex-direction: column;
         align-items: center;
     }

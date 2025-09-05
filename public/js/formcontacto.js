@@ -11,7 +11,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     // Verificar si todos los campos obligatorios están llenos
     if (name && email && tel && perfil && comentario) {
         // Envío de datos al backend
-        fetch('http://tu-servidor.com/enviar-correo', { // Cambia la URL por la URL de tu endpoint
+        fetch('/enviar-correo', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

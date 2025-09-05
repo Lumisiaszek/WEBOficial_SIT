@@ -2,34 +2,32 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"net/http/httputil"
+	"net/url"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
-	apis "github.com/sitserver/portal/Apis"
+	"github.com/sitserver/portal/Apis"
 	db "github.com/sitserver/portal/Db"
 )
 
 func main() {
-	var PORT_I string = "8000"
+	var PORT_I string = "80"
 	gin.SetMode(gin.ReleaseMode)
-	r := gin.Default() //Motor del Framework Gin
+	r := gin.Default()
 
-	//Activa los acceso, por ahora todos los origenes y metodos
 	r.Use(cors.Default())
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"*"}
 	config.AllowMethods = []string{"GET", "POST", "DELETE"}
 	r.Use(cors.New(config))
 
-	//Modo Produccion
-
-	//Rellena los template y Pone en public las carpetas
 	r.LoadHTMLGlob("templates/*.html")
 	r.Static("/public", "./public")
 
-	//Funcion para servir los templates, estos estan fuera de public
 	r.GET("/temp", func(c *gin.Context) {
 		http.ServeFile(c.Writer, c.Request, "./templates/*")
 	})
@@ -43,14 +41,47 @@ func main() {
 	})
 
 	//Enrutadores de la aplicacion
-	r.GET("/", apis.Main)
-	r.GET("/asesorias", apis.Asesorias)
-	r.GET("/geoservicios", apis.Geoservicios)
-	r.GET("/contacto", apis.Contacto)
-	r.GET("/unidad", apis.UnidadEjecutora)
-	r.GET("/sit", apis.QueEsSit)
-	r.GET("/get_proyecto/:sector/:area", apis.GetProyectos)
+	r.GET("/", Apis.Main)
+	r.GET("/asesorias", Apis.Asesorias)
+	r.GET("/getcapas/:id_area/:proyecto", Apis.GetCapas)
+	r.GET("/visualizador_rubita", Apis.Visualizador_Rubita)
+	r.GET("/visualizador_cdt", Apis.Visualizador_cdt)
+	r.GET("/visualizador_rubh", Apis.Visualizador_rubh)
+	r.GET("/geoservicios", Apis.Geoservicios)
+	r.GET("/contacto", Apis.Contacto)
+	r.GET("/unidad", Apis.UnidadEjecutora)
+	r.GET("/ambiente", Apis.Ambiente)
+	r.GET("/sit", Apis.QueEsSit)
+	r.GET("/get_proyecto/:sector/:area", Apis.GetProyectos)
 
-	fmt.Println("PORT Servidor: " + PORT_I)
-	r.Run(":" + PORT_I)
+	// Proxy reverso para /geoserver/*
+	r.Any("/geoserver/*proxyPath", ProxyReverso("localhost:8080"))
+
+	fmt.Println("Iniciando servidor en puerto", PORT_I)
+	err := r.Run(":" + PORT_I)
+	if err != nil {
+		log.Fatalf("Error al iniciar el servidor: %v", err)
+	}
+}
+
+// ProxyReverso crea un handler que redirige las peticiones hacia targetURL
+func ProxyReverso(target string) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		remote, err := url.Parse(target)
+		if err != nil {
+			c.String(http.StatusInternalServerError, "Error en la URL destino: %v", err)
+			return
+		}
+
+		proxy := httputil.NewSingleHostReverseProxy(remote)
+
+		// Opcional: modificar la request antes de enviarla
+		proxy.ModifyResponse = func(resp *http.Response) error {
+			// puedes inspeccionar o modificar la respuesta si es necesario
+			return nil
+		}
+
+		// Redirigir el request original
+		proxy.ServeHTTP(c.Writer, c.Request)
+	}
 }

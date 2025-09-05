@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es-ar">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LA RUBITA - CH 284</title> 
+        <link rel="shortcut icon" href="./public/assets/img/logo_icono.png" />
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-draw@1.0.4/dist/leaflet.draw.css"/>         
+
+        <link rel="stylesheet" href="./public/css/styleVisualizador.css"/>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>  
+        <div class="contenedor_sup">          
+            <div class="contenedor_titulo">
+                <div class="logos">
+                    <a href="https://produccion.chaco.gov.ar/"><img src="./public/assets/img/logomin_icono.png" alt=""></a>
+                    <div class="linea-vertical"></div>
+                    <a href="https://sit.chaco.gob.ar/"><img src="./public/assets/img/logo_icono.png" alt=""></a>
+                </div>
+                <div class="titulomapa">
+                    <h2>{{.title}}</h2> 
+                </div> 
+            </div>
+        
+
+        </div> 
+            <div style="position: absolute; opacity: 0%;">
+                <div class="lat_inicial">{{.lat_inicial}}</div>
+                <div class="long_inicial">{{.long_inicial}}</div>
+                <div class="zoom_inicial">{{.zoom_inicial}}</div>
+                <div class="proyecto_bd">{{.proyecto_bd}}</div>
+            </div>
+
+        <div class="contenedorpanel" id="contenedorpanel">
+            <div class="scroll-wrapper">
+                <div class="tabsPanel">
+                    <button class="tab active" data-tab="capas">Panel de capas</button>
+                    <button class="tab" data-tab="referencias">Referencias</button>
+                </div>
+
+                <div id="tab-capas" class="tab-content active">
+                    <div id="capasCheckboxContainer"></div>
+                </div>
+
+                <div id="tab-referencias" class="tab-content"></div>
+            </div>
+        </div>
+
+        <div id="tab-referencias" class="tab-content"></div> 
+
+        <div class="toggle-tab" id="togglePanel" onclick="togglePanel()">❮</div> 
+
+        <div class="searchBar" class="tooltip-container">
+            <button id="btnAbrirFiltro" onclick="abrirPanelFiltro()">
+                <img src="./public/assets/iconos/searchInput.png" alt="Búsqueda avanzada"/>
+            </button>
+            <div id="filtroDinamico"></div>
+        </div>
+
+        <div id="contenedor_botones">
+
+            <div id="homeView" class="tooltip-container">
+                <button onclick="homeView()">
+                    <img src="./public/assets/iconos/homeView.png" alt="Vista inicial">
+                </button>
+                <div class="custom-tooltip">
+                    <div>
+                        <h3>Volver al inicio</h3>
+                        <p>Restaurá la vista incial del mapa.</p>
+                    </div>            
+                </div>
+
+            </div>
+
+            <div id="baseMapToggle" class="tooltip-container">
+                <button onclick="toggleLayerPanel()">
+                    <img src="./public/assets/iconos/baseMaps.png" alt="Mapa base">
+                </button>
+                <div class="custom-tooltip">
+                    <div>
+                        <h3>Selección de Mapa Base</h3>
+                        <p>Elegí el mapa de base que deseas utilizar.</p>
+                        <p>También podes elegir una imagen VANT.</p>
+                    </div>            
+                </div>
+            </div>
+            <div id="layerPanel" style="display: none;" class="custom-panel">
+            <p>Mapa base:</p>
+            <form id="baseMapOptions">
+                <label><input type="radio" name="baseMap" value="OpenStreetMap"> OpenStreetMap</label>
+                <label><input type="radio" name="baseMap" value="IGN ArgenMap"> IGN ArgenMap</label>
+                <label><input type="radio" name="baseMap" value="Satelital" checked> Satelital</label>
+                <label><input type="radio" name="baseMap" value="CartoDB Gris"> CartoDB Gris</label>
+                <label><input type="radio" name="baseMap" value="ESRI Dark"> ESRI Dark</label>
+                <label><input type="radio" name="baseMap" value="ESRI Topo"> ESRI Topo</label>
+            </form>
+
+            <p>Imágenes VANT Rubita:</p>
+            <form id="overlayOptions">
+                <label><input type="checkbox" value="Rubita 2023">Rubita 2023</label>
+                <label><input type="checkbox" value="Rubita 2024">Rubita 2024</label>
+                <label><input type="checkbox" value="Rubita 2025">Rubita 2025</label>
+            </form>
+            </div>
+
+            <hr>
+
+            <div id="zoomControls">
+                <button onclick="map.zoomIn()" title="Acercar">
+                    <img src="./public/assets/iconos/zoomIn.png" alt="Zoom In">
+                </button>
+                <button onclick="map.zoomOut()" title="Alejar">
+                    <img src="./public/assets/iconos/zoomOut.png" alt="Zoom Out">
+                </button>
+            </div>
+
+            <div id="screenComp">
+                <button onclick="screenComp()">
+                <img src="./public/assets/iconos/screenComp.png" alt="Ubicación actual" title="Pantalla completa">
+                </button>
+            </div>
+
+
+            <div id="ubicActual">
+                <button onclick="goToMyLocation()">
+                <img src="./public/assets/iconos/ubication.png" alt="Ubicación actual" title="¿Donde estoy?">
+                </button>
+            </div>
+
+            <div id="setCoord">
+                <button onclick="toggleCoordMenu()">
+                    <img src="./public/assets/iconos/setCoord.png" alt="Buscar por coordenadas" title="Buscar por coordenadas">
+                </button>
+            </div>
+
+            <div id="coordMenu" class="coord-menu" style ="display:none;">
+                <h4>Buscar por coordenadas</h4>
+                <label for="latitud">Latitud:</label>
+                <input type="text" id="latitud" placeholder="-34.6037">
+                <label for="longitud">Longitud:</label>
+                <input type="text" id="longitud" placeholder="-58.3822">
+                <div class="button-container">
+                    <button onclick="setCoord()">Buscar</button>
+                </div>
+            </div>
+
+            <hr>
+
+            <div id="medirMenu">
+                <button id="toggleMedirMenu" onclick="toggleHerramientaMedir()">
+                    <img src="./public/assets/iconos/H_medir.png" alt="Medir" title="Medir">
+                </button>
+                <div id="medirButtons" style="display: none;">
+                    <button onclick="activarMedicion()">
+                        <img src="./public/assets/iconos/distance.png" alt="Dibujar línea" title="Medir línea">
+                    </button>
+                    <button id="toggleMedirMenu" onclick="activarMedicionArea()">
+                        <img src="./public/assets/iconos/H_pol.png" alt="Medir" title="Medir área">
+                    </button>
+                    <button onclick="startDelete()">
+                        <img src="./public/assets/iconos/H_borr.png" alt="Borrar" title="Borrar">
+                    </button><br>
+                </div>
+            </div>
+
+            <div id="drawMenu">
+                <button id="toggleDrawMenu"><img src="./public/assets/iconos/H_lapiz.png" alt="Dibujar" title="Dibujar"></button>
+                <div id="drawButtons">
+                    <button onclick="startDraw('marker')"><img src="./public/assets/iconos/H_ubic.png" alt="Punto" title="Punto"></button>
+                    <button onclick="startDraw('polyline')"><img src="./public/assets/iconos/H_line.png" alt="Linea" title="Linea"></button>
+                    <button onclick="startDraw('polygon')"><img src="./public/assets/iconos/H_pol.png" alt="Poligono" title="Poligono"></button>
+                    <button onclick="startDraw('rectangle')"><img src="./public/assets/iconos/H_rect.png" alt="Rectangulo" title="Rectangulo"></button>
+                    <button onclick="startDraw('circle')"><img src="./public/assets/iconos/H_circ.png" alt="Circulo" title="Circulo"></button>
+                    <hr>
+                    <button onclick="startEdit()"><img src="./public/assets/iconos/H_edit.png" alt="Editar" title="Editar"></button>
+                    <button onclick="startDelete()"><img src="./public/assets/iconos/H_borr.png" alt="Borrar" title="Borrar"></button><br>
+                </div>
+            </div>
+
+            <hr>
+
+            <div id="downloadMenu">
+                <a class="btn-download" href="https://drive.google.com/drive/folders/1bYr9kOJxLl1VP-9BiOhl-VuZbThmiTqn?usp=sharing" target="_blank" rel="noopener noreferrer">
+                <img src="./public/assets/iconos/capasDesc.png" alt="Descargar capas" title="Descargar capas"></a>
+            </div>
+
+
+            <div id="shareMap">
+                <a class="streetView" href="https://drive.google.com/drive/folders/1bYr9kOJxLl1VP-9BiOhl-VuZbThmiTqn?usp=sharing" target="_blank" rel="noopener noreferrer">
+                <img src="./public/assets/iconos/shareMap.png" alt="Compatir mapa" title="Compartir mapa"></a>
+            </div>
+
+
+            <div id="print-map-btn-container">
+                <button id="btn-imprimir" onclick="printMapWithReferences()"> <img src="./public/assets/iconos/imprimir.png" alt="Imprimir" title="Imprimir"></button>
+            </div>           
+            <div id="previewModal" style="display:none;">
+                <div>
+                    <h3>Previsualización de impresión</h3>
+                    <img id="previewImage"/>
+                    <div class="button-row">
+                        <button onclick="downloadPDF('portrait')">A4 Vertical</button>
+                        <button onclick="downloadPDF('landscape')">A4 Horizontal</button>
+                        <button onclick="downloadPDF('screen')">Pantalla</button>
+                        <button class="button-rowcancelar" onclick="closePreview()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <!-- Contenedor para mapa base, no tocar -->
+        <div id="map"></div>
+
+
+        <div class="mobile-buttons">
+            <div class="mobile-group">
+                <button onclick="toggleMobilePanel('busqueda')"><img src="./public/assets/iconos/searchMobile.png" alt=""></button>
+                <div id="panel-busqueda" class="mobile-panel">
+                    <input id="inputCategoriaMobile" type="text" placeholder="Buscar por parcela" />
+                </div>
+            </div>
+            <div class="mobile-group">
+                <button onclick="toggleMobilePanel('capas')">
+                    <img src="./public/assets/iconos/capasMobile.png" alt="">
+                </button>
+                <div id="panel-capas" class="mobile-panel">
+                    <div id="capasCheckboxContainerMobile"></div> 
+                </div>
+            </div>
+            <div class="mobile-group">
+                <button onclick="toggleMobilePanel('referencias')"><img src="./public/assets/iconos/refMobile.png" alt=""></button>
+                <div id="panel-referencias" class="mobile-panel"></div>
+            </div>
+        </div>
+
+        <div id="info-coordenadas">
+            <span id="textoSRC">EPSG: 5347</span> | <span id="textoCoordenadas"></span>
+        </div>
+
+
+        <!-- Pie de pagina --> 
+        <footer>
+            <div class="piedepagina_pags">
+                    <div class="contenedor_redes">
+                        <a href="https://www.instagram.com/gobiernodelchaco" target="_blank" class="icon"><img class="redes__iconos-svg" src="./public/assets/iconos/instagram.svg" alt="instagram" title="instagram"/></a>
+                        <a href="https://www.facebook.com/GobiernodelChaco" target="_blank" class="icon"><img class="redes__iconos-svg" src="./public/assets/iconos/facebook.svg" alt="facebook" title="facebook"/></a>
+                        <a href="https://x.com/GobiernoChaco" class="icon" target="_blank"><img class="redes__iconos-svg" src="./public/assets/iconos/twitter-x.svg" alt="x-twitter" title="x-twitter"/></a>
+                        <a href="https://canalsomosuno.tv/" class="icon" target="_blank"><img class="redes__iconos-svg" src="./public/assets/iconos/radio.svg" alt="noticiasChaco" title="noticiasChaco"/></a>
+                    </div>
+                    <div class="contenedor_info">
+                        <div class="info_sit">
+                            <a href="mailto:sit.chaco@chaco.gob.ar"><img src="./public/assets/iconos/correo.png" alt="Correo SIT Chaco">sit.chaco@chaco.gob.ar</a>
+                            <a href="https://www.google.com/maps?q=Av.+Sarmiento+1768,+Resistencia,+Chaco" target="_blank"><img src="./public/assets/iconos/ubicacion.png" alt="Direccion SIT Chaco">Av. Sarmiento 1768 - Resistencia, Chaco</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer_copys">
+                    <div class="copy_sit">
+                        &copy; Copyright SIT 2025 - Todos los derechos reservados
+                    </div>
+                </div> 
+            </div> 
+            
+            
+        </footer>
+
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+        <script src="https://unpkg.com/leaflet-image/leaflet-image.js"></script>
+
+        <script src="./public/js/panelResponsive.js"></script>
+        <script src="./public/js/ManejoCapas.js"></script>
+        <script src="./public/js/toolsmap.js"></script>
+        <script src="./public/js/homeView.js"></script>
+        <script src="./public/js/screenComp.js"></script>
+        <script src="./public/js/imprimir.js"></script>
+        <script src="./public/js/drawpers.js"></script>
+        <script src="./public/js/medir.js"></script>
+        <script src="./public/js/ubicAct.js"></script>
+        <script src="./public/js/setCoord.js"></script>
+
+
+    </body>
+</html>
