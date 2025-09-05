@@ -23,14 +23,14 @@ func Login(c *gin.Context) {
 	})
 }
 
-func Asesorias(c *gin.Context) {
-	c.HTML(http.StatusOK, "asesorias.html", gin.H{
+func Urbana(c *gin.Context) {
+	c.HTML(http.StatusOK, "urbana.html", gin.H{
 		"title": "VisorSGM",
 	})
 }
 
-func UnidadEjecutora(c *gin.Context) {
-	c.HTML(http.StatusOK, "unidad.html", gin.H{
+func Territorial(c *gin.Context) {
+	c.HTML(http.StatusOK, "territorial.html", gin.H{
 		"title": "VisorSGM",
 	})
 }
@@ -72,8 +72,7 @@ func Visualizador_cdt(c *gin.Context) {
 		"proyecto_bd":  "2",
 	})
 }
-<<<<<<< HEAD
-=======
+
 func Visualizador_rubh(c *gin.Context) {
 	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
 		"title":        "REGISTROS CH 220-156-157 - RUBH",
@@ -83,19 +82,16 @@ func Visualizador_rubh(c *gin.Context) {
 		"proyecto_bd":  "3",
 	})
 }
->>>>>>> e9e6adb (MapitasConCapasñe)
 
-func Ambiente(c *gin.Context) {
-	c.HTML(http.StatusOK, "ambiente.html", gin.H{
+func Habitat(c *gin.Context) {
+	c.HTML(http.StatusOK, "habitat.html", gin.H{
 		"title": "VisorSGM",
 	})
 }
-<<<<<<< HEAD
-=======
 
 func Mapa_base(c *gin.Context) {
 	c.HTML(http.StatusOK, "mapa_base.html", gin.H{
 		"title": "VisorSGM",
 	})
 }
->>>>>>> e9e6adb (MapitasConCapasñe)
+

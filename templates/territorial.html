@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SIT Chaco - Sistema de Información Territorial</title>
+        <link rel="icon" type="image/svg+xml" href="./public/img/logo_icono.png">
+        <meta content="Sistema de información territorial de la provincia del Chaco, herramienta de visualización, consulta y descarga de datos georreferenciados" name="description">
+        <meta content="geoportal, datos, georreferencia, visualizador, Chaco, SIT, Sistemas de informacion territorial, gis, sig" name="keywords">
+
+        <!-- Estilos -->
+        <link rel="stylesheet" href="./public/css/style.css">
+    </head>
+
+<body>
+    {{ template "cabezera.html" }}
+
+    <div class="areas_contenedor">
+        <div class="areas_info">
+            <h1>Planificación Territorial</h1>
+                <div class="areas_titulos">
+                    <div class="titulos_ind_1">
+                        <img src="./public/assets/iconos/planifproy.png" alt="">
+                        <p>Planif. de proyectos</p>
+                    </div>
+                    <div class="titulos_ind_2">
+                        <img src="./public/assets/img/logoSIT_Azul.png" alt="">
+                        <p>Depto SIT </p>
+                    </div>
+                </div>
+        </div>
+   
+        <div class="asesoriasgeneral">
+                <div class="asesoriasgeneral_lista">
+                    <ul class="asesorias_lista">
+                        <li class="asesoria_item">
+                            <span class="asesoria_nombre">
+                              <a href="./visualizador_rubh" style="text-decoration: none; color: inherit;">
+                                Planes Urbanos Integrales                           
+                              </a>
+                            </span>
+                            <span class="asesoria_iconos">
+                            <img src="./public/assets/iconos/iconmas.png" alt="Ver Mapas" title="Ver Mapas">
+                            <img src="./public/assets/iconos/iconinfo.png" alt="Ver Informacion" title="Ver informacion">
+                            </span>
+                        </li>
+                        <li class="asesoria_item">
+                            <span class="asesoria_nombre">
+                              <a href="./visualizador_rubh" style="text-decoration: none; color: inherit;">
+                                Instrumentos de Gestion Urbana                           
+                              </a>
+                            </span>
+                            <span class="asesoria_iconos">
+                            <img src="./public/assets/iconos/iconmas.png" alt="Ver Mapas" title="Ver Mapas">
+                            <img src="./public/assets/iconos/iconinfo.png" alt="Ver Informacion" title="Ver informacion">
+                            </span>
+                        </li>  
+                    </ul>
+                </div>
+                <div class="asesoriasgeneral_prev">
+                    <div class="asesoriasgeneral_prev_botones">
+                        <a href="">DESCARGAR DATOS</a>
+                        <a href="">VER MAPA</a>
+                    </div>    
+                    <a href="https://chaco.gob.ar/" class="logoMPyDES"><img src="./public/assets/img/mapprev.png" alt="MapaWeb"></a>
+                </div>
+        </div>
+    </div>
+
+
+   {{ template "pie.html" }}
+    <script src="./public/js/config.js"></script>
+    <script>
+       
+        function TraerProyectos(sector, area) {
+            fetch(UrlServer +'/get_proyecto/'+ sector+'/'+area)
+                .then(response => response.json())
+                .then(data => {
+                    const asesoriasLista = document.querySelector('.asesorias_lista');
+                    asesoriasLista.innerHTML = ''; // Limpiar la lista antes de agregar nuevos elementos
+                    data.forEach(proyecto => {
+                        const li = document.createElement('li');
+                        li.classList.add('asesoria_item');
+                        li.innerHTML = `
+                            <span class="asesoria_nombre">${proyecto.NoProyecto}</span>
+                            <span class="asesoria_iconos">
+                                <img src="./public/assets/iconos/iconmas.png" alt="Ver Mapas" title="Ver Mapas">
+                                <img src="./public/assets/iconos/iconinfo.png" alt="Ver Informacion" title="Ver informacion">
+                            </span>
+                        `;
+                        asesoriasLista.appendChild(li);
+                    });
+                })
+                .catch(error => console.error('Error al obtener los proyectos:', error));
+        }
+
+        TraerProyectos("U","U");
+    </script>
+
+</body>
