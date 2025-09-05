@@ -53,18 +53,6 @@ func Contacto(c *gin.Context) {
 	})
 }
 
-func Visor(c *gin.Context) {
-	c.HTML(http.StatusOK, "visor.html", gin.H{
-		"title": "VisorSGM",
-	})
-}
-
-func Atlas(c *gin.Context) {
-	c.HTML(http.StatusOK, "atlas.html", gin.H{
-		"title": "VisorSGM",
-	})
-}
-
 func Visualizador_Rubita(c *gin.Context) {
 	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
 		"title":        "LA RUBITA - CH 284 | PROYECTO EJECUTIVO",
@@ -77,20 +65,21 @@ func Visualizador_Rubita(c *gin.Context) {
 
 func Visualizador_cdt(c *gin.Context) {
 	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
-		"title":        "PROYECTO NUEVO SUR",
-		"lat_inicial":  "-27.48",
-		"long_inicial": "-59.00",
+		"title":        "PROYECTO NUEVO SUR - CAMPO DE TIRO",
+		"lat_inicial":  "-27.49",
+		"long_inicial": "-59.03",
 		"zoom_inicial": "14",
 		"proyecto_bd":  "2",
 	})
 }
+
 func Visualizador_rubh(c *gin.Context) {
 	c.HTML(http.StatusOK, "visualizador_base.html", gin.H{
 		"title":        "REGISTROS CH 220-156-157 - RUBH",
 		"lat_inicial":  "-27.50",
 		"long_inicial": "-59.03",
 		"zoom_inicial": "14",
-		"proyecto_bd":  "2",
+		"proyecto_bd":  "3",
 	})
 }
 
@@ -105,3 +94,4 @@ func Mapa_base(c *gin.Context) {
 		"title": "VisorSGM",
 	})
 }
+
